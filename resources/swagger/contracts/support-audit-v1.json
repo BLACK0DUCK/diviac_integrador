@@ -1,0 +1,93 @@
+{
+  "openapi":"3.0.1",
+  "info":{
+    "title":"OpenAPI definition",
+    "version":"v0"
+  },
+  "servers":[
+    {
+      "url":"http://localhost:8090/support/audit-producer-management",
+      "description":"Generated server url"
+    }
+  ],
+  "paths":{
+    "/producers/send":{
+      "post":{
+        "tags":[
+          "producer-controller"
+        ],
+        "operationId":"sendMessage",
+        "requestBody":{
+          "content":{
+            "application/json":{
+              "schema":{
+                "$ref":"#/components/schemas/AuditRequestSupport"
+              }
+            }
+          },
+          "required":true
+        },
+        "responses":{
+          "200":{
+            "description":"OK"
+          }
+        }
+      }
+    }
+  },
+  "components":{
+    "schemas":{
+      "AuditRequestSupport":{
+        "required":[
+          "applicationId",
+          "applicationName",
+          "consumerId",
+          "functionalActionCode",
+          "httpStatus",
+          "transactionId"
+        ],
+        "type":"object",
+        "properties":{
+          "transactionId":{
+            "type":"string",
+            "description":"Transaction identifier",
+            "format":"uuid"
+          },
+          "applicationId":{
+            "type":"string",
+            "description":"Application identifier"
+          },
+          "applicationName":{
+            "type":"string",
+            "description":"Application name"
+          },
+          "consumerId":{
+            "type":"string",
+            "description":"Police CIP"
+          },
+          "functionalActionCode":{
+            "type":"string"
+          },
+          "httpStatus":{
+            "type":"string",
+            "description":"Http Status",
+            "enum":[
+              "HTTP_200",
+              "HTTP_400",
+              "HTTP_401",
+              "HTTP_500"
+            ]
+          },
+          "recordBeforeChange":{
+            "type":"string",
+            "description":"Record before change"
+          },
+          "recordAfterChange":{
+            "type":"string",
+            "description":"Record after change"
+          }
+        }
+      }
+    }
+  }
+}
